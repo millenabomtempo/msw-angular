@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from './user.service';
+import { IUser } from './models';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'msw-angular';
+  users: IUser[] = []
+
+  constructor(private userServive: UserService) {}
+
+  ngOnInit() {
+    this.userServive.getUser().subscribe(users => {
+      this.users = users
+    })
+  }
 }
